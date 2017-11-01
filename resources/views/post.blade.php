@@ -28,6 +28,7 @@
                                 <label >Año publicación</label>
                                 <textarea name="year" class="form-control"></textarea>
                             </div>
+                            </br>
                             <div class="col-md-12">
                                 <select id="example-getting-started" multiple="multiple">
                                     <option value="cheese">Cheese</option>
