@@ -15,13 +15,13 @@
                     @endif
 
 
-                           
-
                         </div>
                         </br>
                         
                             <div class="row">
+
                                 @foreach ($users as $user)
+                                @endforeach
                                 <div class="col-md-12">
                                    
                                         <p>Nombre de usuario: {{ Auth::user()->name  }}</p>
@@ -33,7 +33,7 @@
                                 <div class="col-md-6 text-right">
                                     <a href="user/{{$user->id}}" class="text-right">comentar</a>
                                 </div>
-                                @endforeach
+                                
                             </div>
                   
                 </div>
@@ -41,4 +41,7 @@
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="{{asset('/js/bootstrap-multiselect.js')}}"></script>
 @endsection
