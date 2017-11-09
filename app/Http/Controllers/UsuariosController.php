@@ -22,10 +22,11 @@ class UsuariosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getView()
+    public function index()
     {
 
-        $users = user::all();
-        return view('usuario')->with("users",$users);
+       // $users = user::all();
+        $user = auth()->user();
+        return view('usuario')->with("user",$user);
     }
 }

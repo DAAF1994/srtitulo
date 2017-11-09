@@ -15,7 +15,6 @@ class AddDevelopersToGames extends Migration
     {
         Schema::table('games', function($table) {
             $table->string('developer');
-            $table->dropColumn('genre');
         });
     }
 
@@ -26,9 +25,10 @@ class AddDevelopersToGames extends Migration
      */
     public function down()
     {
+        /*
         Schema::table('games', function($table) {
             $table->dropColumn('developer');
-            $table->dropColumn('genre');
         });
+        */
     }
 }

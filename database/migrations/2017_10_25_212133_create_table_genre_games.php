@@ -16,11 +16,10 @@ class CreateTableGenreGames extends Migration
         Schema::create('genregames', function($table)
         {
             $table->increments('id');
-            
             $table->integer('games_id')->unsigned();
-            $table->foreign('games_id')->references('id')->on('games')->onDelete('cascade');
+            $table->foreign('games_id')->references('id')->on('games');
             $table->integer('genre_id')->unsigned();
-            $table->foreign('genre_id')->references('id')->on('genre')->onDelete('cascade');
+            $table->foreign('genre_id')->references('id')->on('genre');
             $table->timestamps();
         });
     }
@@ -32,6 +31,8 @@ class CreateTableGenreGames extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::drop('genregames');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

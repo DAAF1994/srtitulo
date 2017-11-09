@@ -22,6 +22,6 @@ Route::get('/nuevopost', 'JuegosController@index')->name('nuevopost');
 Route::post('/agregar','JuegosController@addGame');
 Route::post('/comentar','PostController@postComentar');
 Route::get('/post/{id}','PostController@getView');
-Route::get('/usuario','UsuariosController@getView');
+Route::get('/usuario','UsuariosController@index');
 
 

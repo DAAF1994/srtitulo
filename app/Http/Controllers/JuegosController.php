@@ -31,6 +31,7 @@ class JuegosController extends Controller
     public function addGame(Request $request) //agregar un nuevo post
     {
 
+            dd($request);
             $juego = new Juego();
             $juego->title = $request->input("title"); // $juego->titulo = bob esponja
             $juego->year = $request->input("year");
