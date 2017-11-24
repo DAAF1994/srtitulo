@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableGames extends Migration
+class CreatePlatformTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateTableGames extends Migration
      */
     public function up()
     {
-        Schema::create('games', function($table)
+     Schema::create('platform', function($table)
         {
             $table->increments('id');
-            $table->string('title');;
-            $table->string('year');
-            $table->string('plot', 500);
+            $table->string("name");
             $table->timestamps();
-
-        });
+        });    
     }
 
     /**
@@ -31,6 +28,6 @@ class CreateTableGames extends Migration
      */
     public function down()
     {
-        Schema::drop('games');
+        Schema::drop('platform');
     }
 }

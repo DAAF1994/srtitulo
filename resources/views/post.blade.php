@@ -39,12 +39,9 @@
                             </br>
                             <div class="col-md-12">
                                 <select id="multiselect-genre" name="genre[]" multiple="multiple">
-                                    <option value="cheese">Cheese</option>
-                                    <option value="tomatoes">Tomatoes</option>
-                                    <option value="mozarella">Mozzarella</option>
-                                    <option value="mushrooms">Mushrooms</option>
-                                    <option value="pepperoni">Pepperoni</option>
-                                    <option value="onions">Onions</option>
+                                    @foreach($genres as $genre)
+                                        <option value="{{$genre->id}}">{{$genre->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
@@ -58,7 +55,7 @@
                         </div> 
                              
                                 
-                      </form>
+                    </form>
                 </div>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -76,3 +73,19 @@
 </div>
 
 @endsection
+
+{{--
+    <option value="Action">Acción</option>
+                                    <option value="Strategy">Estrategia</option>
+                                    <option value="RPG">RPG</option>
+                                    <option value="Sports">Deportes</option>
+                                    <option value="Simulation">Simulación</option>
+                                    <option value="Racing">Carreras</option>
+                                    <option value="Plataform">Plataformas</option>
+                                    <option value="Puzzle">Puzzle</option>
+                                    <option value="Stealth">Sigilo</option>
+                                    <option value="Shooter">Shooter</option>
+                                    <option value="Openworld">Mundo Abierto</option>
+                                    <option value="Visualnovel">Novela Visual</option>
+                                    
+--}}

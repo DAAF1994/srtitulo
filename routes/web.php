@@ -18,10 +18,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/', 'HomeController@index');
+//Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/nuevopost', 'JuegosController@index')->name('nuevopost');
 Route::post('/agregar','JuegosController@addGame');
-Route::post('/comentar','PostController@postComentar');
-Route::get('/post/{id}','PostController@getView');
+//Route::post('/comentar','PostController@postComentar');
+//Route::get('/post/{id}','PostController@getView');
 Route::get('/usuario','UsuariosController@index');
+Route::post('verjuego', 'JuegosController@getgame');
+Route::get('/game/{id}', 'JuegosController@getGame');
+Route::post('/valorarjuego', 'JuegosController@valorar');
+//Route::post('/{$gamename}', 'JuegosController@postgame');
 
 

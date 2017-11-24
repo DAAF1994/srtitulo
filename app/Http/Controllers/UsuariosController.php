@@ -1,9 +1,9 @@
 <?php
 
-namespace NotgameSuggestions\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use NotgameSuggestions\user;
+use App\user;
 
 class UsuariosController extends Controller
 {

@@ -171,11 +171,11 @@ return [
         /*
          * Application Service Providers...
          */
-        NotgameSuggestions\Providers\AppServiceProvider::class,
-        NotgameSuggestions\Providers\AuthServiceProvider::class,
-        // NotgameSuggestions\Providers\BroadcastServiceProvider::class,
-        NotgameSuggestions\Providers\EventServiceProvider::class,
-        NotgameSuggestions\Providers\RouteServiceProvider::class,
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
 
     ],
 

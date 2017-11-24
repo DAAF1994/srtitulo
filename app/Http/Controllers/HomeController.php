@@ -1,9 +1,14 @@
 <?php
 
-namespace NotgameSuggestions\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use NotgameSuggestions\Juego;
+use App\Juego;
+use App\GenreGame;
+use App\genre;
+use App\Platform;
+use App\PlatformGame;
+
 
 class HomeController extends Controller
 {
@@ -26,6 +31,11 @@ class HomeController extends Controller
     {
 
         $games = Juego::all();
-        return view('home')->with("games",$games);
+        $genregames = GenreGame::all();
+        $genre = genre::all();
+        $platform = Platform::all();
+        $platformgames = PlatformGame::all();
+        return view('home')->with("games",$games)->with("genregames",$genregames)->with("genero",$genre)->with("platformgames",$platformgames)->with("plataforma",$platform);
+
     }
 }

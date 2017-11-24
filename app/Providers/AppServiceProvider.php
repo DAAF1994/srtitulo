@@ -1,6 +1,6 @@
 <?php
 
-namespace NotgameSuggestions\Providers;
+namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

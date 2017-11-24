@@ -16,18 +16,16 @@
 
 
                         </div>
-                        </br>
-                        
                             <div class="row">
 
-                                <div class="col-md-12" style="margin-right:5px">
+                                <div class="col-md-6" style="margin-left:15px">
                                     <p>Nombre de usuario: {{ Auth::user()->name  }}</p>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-6" style="margin-left:15px">
                                     <p>Email: {{ Auth::user()->email  }}</p>
                                 </div>  
                                 
-                            </div>
+                        </div>
                   
                 </div>
             </div>
