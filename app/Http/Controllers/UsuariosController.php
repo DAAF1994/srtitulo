@@ -25,7 +25,6 @@ class UsuariosController extends Controller
     public function index()
     {
 
-       // $users = user::all();
         $user = auth()->user();
         return view('usuario')->with("user",$user);
     }

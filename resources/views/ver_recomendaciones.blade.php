@@ -16,37 +16,14 @@
                     @endif
 
                         <div class="row">
-                            <div class="col-md-12">
-                                <a href="{{asset('nuevopost')}}" class="btn btn-success">Nuevo juego</a>
-                            </div>
-                        </div>
+                            <h3>Recomendaciones de Juegos</h3>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <a href="/prueba/{{Auth::id()}}" class="btn btn-success">Ver recomendaciones</a>
-                            </div>
                         </div>
                         </br>
-                        @if (count($games) == 0)
-                            <label> Aún no hay juegos en el sistema</label>
-                        @else
+                     
                             <div class="row">
-                                <form action="/buscarjuego" method="POST" role="search">
-                                    {{ csrf_field() }}
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="gamename"
-                                            placeholder="Buscar Juegos"> <span class="input-group-btn">
-                                            <button type="submit" class="btn btn-default">
-                                                <span class="glyphicon glyphicon-search"></span>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </form>
-
-                            </br>
                             <table class="tabladavid">
-                                @foreach ($games as $game)
-                    
+                                @foreach ($juegos_recomendados as $game)
                                               <tr>
                                                 <th>Título</th>
                                                 <td> {{ $game->title }} </td>
@@ -67,32 +44,27 @@
                                                 <th>Géneros</th>
                                                 <td>
                                                     @foreach($game->getGenreGames as $genre)
-                                                      {{$genre->getGenre->name}},
+                                                      {{$genre->getGenre->name}}
                                                     @endforeach
                                                 </td>
                                               </tr>
                                                 <tr>
-                                                    <th>Desarrollador</th>
-                                                    <td> {{ $game->developer }}</td>
+                                                  <th>Desarrollador</th>
+                                                  <td> {{ $game->developer }}</td>
                                                 </tr>
                                                 
-                                               <tr>
+                                                <tr>
                                                   <th>Plataformas</th>
                                                   <td>
                                                     @foreach($game->getPlatformGame as $platform)
-                                                      {{$platform->getPlatform->name}},
+                                                      {{$platform->getPlatform->name}}
                                                     @endforeach
                                                   </td>
                                                 </tr>
-                                                
                                 @endforeach
                                 </table>
                             </div>
-
-                        
-                        @endif
-                            
-                  
+      
                 </div>
             </div>
         </div>

@@ -13,6 +13,6 @@ class PlatformGame extends Model
     }
 
     public function getPlatform(){
-    	return $this->hasOne('App\Platform', 'platform_id');
+    	return $this->belongsTo('App\Platform', 'platform_id');
     }
 }

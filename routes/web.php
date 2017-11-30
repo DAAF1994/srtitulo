@@ -24,9 +24,15 @@ Route::post('/agregar','JuegosController@addGame');
 //Route::post('/comentar','PostController@postComentar');
 //Route::get('/post/{id}','PostController@getView');
 Route::get('/usuario','UsuariosController@index');
+Route::post('/buscarjuego', 'JuegosController@buscarjuego');
 Route::post('verjuego', 'JuegosController@getgame');
 Route::get('/game/{id}', 'JuegosController@getGame');
 Route::post('/valorarjuego', 'JuegosController@valorar');
+Route::get('/prueba/{id}', 'JuegosController@recomendar_juegos');
+
+Route::get('auth/logout', 'Auth\AuthController@logout');
+
+
 //Route::post('/{$gamename}', 'JuegosController@postgame');
 
 

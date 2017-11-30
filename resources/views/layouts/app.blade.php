@@ -58,20 +58,20 @@
                                             Mi cuenta
                                         </a>
 
-                                        <form id="logout-form" action="usuario" method="GET" style="display: none;">
+                                        <form action="usuario" method="GET" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
                                     <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Salir
+
+                                        <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            Salir  
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
+
                                     <li>
                                 </ul>
                             </li>
