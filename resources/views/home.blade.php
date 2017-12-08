@@ -97,6 +97,8 @@
             </div>
         </div>
     </div>
+    <a href='https://www.freepik.com/free-vector/joystick-vector-seamless_1389671.htm'>Designed by Freepik</a>
+
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

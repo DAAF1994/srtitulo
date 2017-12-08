@@ -94,7 +94,7 @@ class JuegosController extends Controller
 
 
 	public function valorar(Request $request){
-		
+		dd($request);
 		//Obtener id del usuario activo
 		$userid = Auth::id();
 		//Hacer valoración para el juego
@@ -103,7 +103,6 @@ class JuegosController extends Controller
 		$valoracion->rate = $request->input('rate');
 		$valoracion->users_id = $userid;
 		$valoracion->save();
-
 		return redirect('/');
 	}
 
@@ -117,15 +116,17 @@ class JuegosController extends Controller
 
 
 	public function recomendar_juegos($id){
-		$usuarios = User::where('id','!=',$id)->get();
-		$games = Juego::all();
-		$usersgame = valoracion::where('users_id','=',$id)->select('rate')->get();
+		$usuarios = User::where('id','!=',$id)->get(); //obtener id de los usuarios distintos al activo
+		$games = Juego::all(); //obtener todos los juegos
+		$usersgame = valoracion::where('users_id','=',$id)->select('rate')->get();//obtener valoraciones de los usuarios a los juegos
 		$a = $this->rateSum($usersgame);
 		//Notas promedio del usuario activo
 		$avgActiveUser = $this->rateSum($usersgame)/count($usersgame);
-		
 		$corr_array = [];
+		$dj = []; #id del juego con rbj
+		$discriminante = [];
 		foreach ($usuarios as $user) {
+			$discriminante[$user->id] = [];
 			$buserGames = valoracion::where('users_id','=',$user->id)->select('rate')->get();
 			//Obtener las notas promedio
 			$avguser = $this->rateSum($buserGames)/count($buserGames);
@@ -147,17 +148,23 @@ class JuegosController extends Controller
 				   $denominatorA = $denominatorA + pow($raj,2);
 				   $denominatorB = $denominatorB + pow($rbj,2);
 				}
+				if(empty($rate_user) && !empty($rate)){//conseguir discriminante de juegos que no tiene el usuario activo
+					$rbj = $rate->rate - $avguser;
+					$discriminante[$user->id][$id_game] = $rbj;
+				}
 			}
 			//Guardar las correlaciones en un arreglo asociativo   id_usuario => correlacion
 			$corr_array[$user->id] = $numerator / sqrt($denominatorA * $denominatorB);
-		}
+		}		
+		
 		//Ordenar recomendaciones por valores más cercanos al 1
 		arsort($corr_array);
 		$recomendaciones = [];
 		$counter = 1;
+		$prediccion = 0;
 		//Función para hacer recomendaciones, 
 		foreach ($corr_array as $userid => $corr) {
-			if ($counter <=5){
+			if ($counter <=5){ //5 es la cantidad de vecinos a evaluar
 				$games1 = valoracion::where('users_id','=',$userid)->pluck('games_id')->toArray();
 				$gamesActiveUser = valoracion::where('users_id','=',$id)->pluck('games_id')->toArray();
 				//Obtener ids de juegos diferentes
@@ -165,17 +172,51 @@ class JuegosController extends Controller
 				//Si existen juegos que se puedan recomendar al usuario activo
 				if(count($diffgames)>0){
 					foreach ($diffgames as $key => $value) {
-						$recomendaciones[] = $value;
-					}
+						$sumanum = 0;
+						$sumaden = 0;
+						foreach ($corr_array as $key2 => $value2) {
+							$sumanum = $sumanum + ($discriminante[$userid][$value] * $value2);
+							$sumaden = $sumaden + $value2; 
+						}
+						$prediccion = $avgActiveUser + ($sumanum/$sumaden); 
+						
+					if($prediccion>=5){
+							$recomendaciones[$value] = $prediccion; //guardar los juegos que el usuario B haya evaluado
+						}											//y el usuario A no haya evaluado
+
+					}											
+											
 				}
 				$counter++;
 			}else{
 				break;
 			}
 		}
-		
-		$juegos_recomendados = Juego::find($recomendaciones);
+		arsort($recomendaciones);//ordenar las predicciones de mayor a menor
+		//$juegos_recomendados = Juego::find(array_keys($recomendaciones)); //enviar recomendaciones a la vista
+		$juegos_recomendados = [];
+		foreach ($recomendaciones as $key => $value) {
+			$juegos_recomendados[] = Juego::find($key);
+		}
 		return view('ver_recomendaciones')->with('juegos_recomendados', $juegos_recomendados);
+	}
+
+	public function obtener_perfil(){
+		// Stardew Valley, Torchlight 2*, Mark of the Ninja, Undertale, The Stanley Parable*
+		// Limbo*, Cuphead, The Binding of Isaac, 7 Days to Die, Rocket League, Don't Starve, Doki Doki Literature Club*
+		// A Detective's Novel, Dust: an Elysian tale, Hotline Miami, Castle Crashers, Darkest Dungeon, American Truck Simulator
+		// Skullgirls, Road Redemption
+		$games = ['Stardew Valley',  'Mark of the Ninja', 'Undertale', 'Cuphead', 'The Binding of Isaac', 
+		'7 Days to Die', 'Rocket League', "Don't Starve",
+		"A Detective's Novel", 'Dust: an Elysian tale', 'Hotline Miami', 'Castle Crashers', 'Darkest Dungeon', 
+		'American Truck Simulator', 'Skullgirls', 'Road Redemption'];
+		$juegos_paraevaluar = [];
+		foreach ($games as $key => $value) {
+			$juegos_paraevaluar[] = Juego::where('title', $value)->first();
+		}
+
+		//dd($juegos_paraevaluar);
+		return view('obtener_perfil')->with('juegos_paraevaluar', $juegos_paraevaluar);
 	}
 
 }

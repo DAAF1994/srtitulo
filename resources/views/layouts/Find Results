@@ -1,0 +1,228 @@
+Searching 5982 files for "branding"
+
+C:\Users\David Acuña\TrabajoTitulo\srtitulo\resources\views\layouts\app.blade.php:
+   29                      </button>
+   30  
+   31:                     <!-- Branding Image -->
+   32                      <a class="navbar-brand" href="{{ url('/') }}">
+   33                          {{ config('app.name') }}
+
+C:\Users\David Acuña\TrabajoTitulo\srtitulo\storage\framework\views\8d090c6709f063433043935240caf2942637f6dc.php:
+   29                      </button>
+   30  
+   31:                     <!-- Branding Image -->
+   32                      <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
+   33                          <?php echo e(config('app.name')); ?>
+
+C:\Users\David Acuña\TrabajoTitulo\srtitulo\storage\framework\views\adf087c64e7e69c29e8f990d722d2d43b4fd8c12.php:
+   29                      </button>
+   30  
+   31:                     <!-- Branding Image -->
+   32                      <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
+   33                          <?php echo e(config('app.name')); ?>
+
+C:\Users\David Acuña\TrabajoTitulo\srtitulo\vendor\fzaninotto\faker\src\Faker\Provider\nl_NL\Text.php:
+ 1038  leunde nog liever tegen een dennestam. Nee dan was Coba heel wat
+ 1039  beter af. Zoo'n man als een zee! En meteen kreeg ze een visioen van
+ 1040: wit zand en zon en golven en branding, en roode en blauwe badpakjes en
+ 1041  witte jurken en witte en roode parasols. En van duinen met uitgeholde
+ 1042  flank, met helmsprieten, gebogen waaiend, er bovenop. En van een golf
+ ....
+ 2558  twee samen op 't steenen havenhoofd staan praten en over de balustrade
+ 2559  gekeken naar de lichtboei en 't draaiende licht van Schouwen en naar
+ 2560: de branding geluisterd, en "bekgetrokken" zooals Hoyer 't ordinair
+ 2561  uitdrukte. Bavink zei weer dat i 't wel gedacht had en ik zei: "ook
+ 2562  stom, dat hadden we kunnen weten," en toen kwamen wij los over Japi
+ ....
+ 3235  
+ 3236  Nu was de zon lager en rood, de gouden streep was weg. 't Was een
+ 3237: warme, stille avond. Het roode water rimpelde wat, de branding rolde
+ 3238  langzaam en ruischte maar zacht.
+ 3239  
+
+C:\Users\David Acuña\TrabajoTitulo\srtitulo\vendor\laravel\framework\src\Illuminate\Auth\Console\stubs\make\views\layouts\app.stub:
+   28                      </button>
+   29  
+   30:                     <!-- Branding Image -->
+   31                      <a class="navbar-brand" href="{{ url('/') }}">
+   32                          {{ config('app.name', 'Laravel') }}
+
+7 matches across 5 files
+
+
+Searching 5982 files for "app.name"
+
+C:\Users\David Acuña\TrabajoTitulo\srtitulo\bootstrap\cache\services.php:
+   90      'command.up' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+   91      'command.view.clear' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+   92:     'command.app.name' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+   93      'command.auth.make' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+   94      'command.cache.table' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+
+C:\Users\David Acuña\TrabajoTitulo\srtitulo\resources\views\layouts\app.blade.php:
+    9      <meta name="csrf-token" content="{{ csrf_token() }}">
+   10  
+   11:     <title>{{ config('app.name', 'Laravel') }}</title>
+   12  
+   13      <!-- Styles -->
+   ..
+   31                      <!-- Branding Image -->
+   32                      <a class="navbar-brand" href="{{ url('/') }}">
+   33:                         {{ config('app.name') }}
+   34                      </a>
+   35                  </div>
+   ..
+   96  
+   97  <!--<a class="navbar-brand" href="{{ url('/') }}">
+   98:                         {{ config('app.name', 'Laravel') }}
+   99                      </a>
+  100  
+
+C:\Users\David Acuña\TrabajoTitulo\srtitulo\storage\framework\views\3027ef83c4f14f18ebe29f69aa3d5f852e504a3c.php:
+    3      <?php $__env->slot('header'); ?>
+    4          <?php $__env->startComponent('mail::header', ['url' => config('app.url')]); ?>
+    5:             <?php echo e(config('app.name')); ?>
+    6  
+    7          <?php echo $__env->renderComponent(); ?>
+    .
+   25      <?php $__env->slot('footer'); ?>
+   26          <?php $__env->startComponent('mail::footer'); ?>
+   27:             © <?php echo e(date('Y')); ?> <?php echo e(config('app.name')); ?>. All rights reserved.
+   28          <?php echo $__env->renderComponent(); ?>
+   29      <?php $__env->endSlot(); ?>
+
+C:\Users\David Acuña\TrabajoTitulo\srtitulo\storage\framework\views\71bdb17e3cbd53a9d604487d44277411100bdd72.php:
+   51  
+   52  <?php else: ?>
+   53: Regards,<br><?php echo e(config('app.name')); ?>
+   54  
+   55  <?php endif; ?>
+
+C:\Users\David Acuña\TrabajoTitulo\srtitulo\storage\framework\views\815d017a4585e491739f8d0122b08719d31a85c6.php:
+    3      <?php $__env->slot('header'); ?>
+    4          <?php $__env->startComponent('mail::header', ['url' => config('app.url')]); ?>
+    5:             <?php echo e(config('app.name')); ?>
+    6  
+    7          <?php echo $__env->renderComponent(); ?>
+    .
+   25      <?php $__env->slot('footer'); ?>
+   26          <?php $__env->startComponent('mail::footer'); ?>
+   27:             &copy; <?php echo e(date('Y')); ?> <?php echo e(config('app.name')); ?>. All rights reserved.
+   28          <?php echo $__env->renderComponent(); ?>
+   29      <?php $__env->endSlot(); ?>
+
+C:\Users\David Acuña\TrabajoTitulo\srtitulo\storage\framework\views\8d090c6709f063433043935240caf2942637f6dc.php:
+    9      <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+   10  
+   11:     <title><?php echo e(config('app.name', 'Laravel')); ?></title>
+   12  
+   13      <!-- Styles -->
+   ..
+   31                      <!-- Branding Image -->
+   32                      <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
+   33:                         <?php echo e(config('app.name')); ?>
+   34  
+   35                      </a>
+   ..
+   90  
+   91  <!--<a class="navbar-brand" href="<?php echo e(url('/')); ?>">
+   92:                         <?php echo e(config('app.name', 'Laravel')); ?>
+   93  
+   94                      </a>
+
+C:\Users\David Acuña\TrabajoTitulo\srtitulo\storage\framework\views\adf087c64e7e69c29e8f990d722d2d43b4fd8c12.php:
+    9      <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+   10  
+   11:     <title><?php echo e(config('app.name', 'Laravel')); ?></title>
+   12  
+   13      <!-- Styles -->
+   ..
+   31                      <!-- Branding Image -->
+   32                      <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
+   33:                         <?php echo e(config('app.name')); ?>
+   34  
+   35                      </a>
+   ..
+   99  
+  100  <!--<a class="navbar-brand" href="<?php echo e(url('/')); ?>">
+  101:                         <?php echo e(config('app.name', 'Laravel')); ?>
+  102  
+  103                      </a>
+
+C:\Users\David Acuña\TrabajoTitulo\srtitulo\vendor\laravel\framework\src\Illuminate\Auth\Console\stubs\make\views\layouts\app.stub:
+    9      <meta name="csrf-token" content="{{ csrf_token() }}">
+   10  
+   11:     <title>{{ config('app.name', 'Laravel') }}</title>
+   12  
+   13      <!-- Styles -->
+   ..
+   30                      <!-- Branding Image -->
+   31                      <a class="navbar-brand" href="{{ url('/') }}">
+   32:                         {{ config('app.name', 'Laravel') }}
+   33                      </a>
+   34                  </div>
+
+C:\Users\David Acuña\TrabajoTitulo\srtitulo\vendor\laravel\framework\src\Illuminate\Foundation\Console\stubs\markdown.stub:
+    9  
+   10  Thanks,<br>
+   11: {{ config('app.name') }}
+   12  @endcomponent
+   13  
+
+C:\Users\David Acuña\TrabajoTitulo\srtitulo\vendor\laravel\framework\src\Illuminate\Foundation\Providers\ArtisanServiceProvider.php:
+  117       */
+  118      protected $devCommands = [
+  119:         'AppName' => 'command.app.name',
+  120          'AuthMake' => 'command.auth.make',
+  121          'CacheTable' => 'command.cache.table',
+  ...
+  178      protected function registerAppNameCommand()
+  179      {
+  180:         $this->app->singleton('command.app.name', function ($app) {
+  181              return new AppNameCommand($app['composer'], $app['files']);
+  182          });
+
+C:\Users\David Acuña\TrabajoTitulo\srtitulo\vendor\laravel\framework\src\Illuminate\Mail\resources\views\html\message.blade.php:
+    3      @slot('header')
+    4          @component('mail::header', ['url' => config('app.url')])
+    5:             {{ config('app.name') }}
+    6          @endcomponent
+    7      @endslot
+    .
+   22      @slot('footer')
+   23          @component('mail::footer')
+   24:             &copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.
+   25          @endcomponent
+   26      @endslot
+
+C:\Users\David Acuña\TrabajoTitulo\srtitulo\vendor\laravel\framework\src\Illuminate\Mail\resources\views\markdown\message.blade.php:
+    3      @slot('header')
+    4          @component('mail::header', ['url' => config('app.url')])
+    5:             {{ config('app.name') }}
+    6          @endcomponent
+    7      @endslot
+    .
+   22      @slot('footer')
+   23          @component('mail::footer')
+   24:             © {{ date('Y') }} {{ config('app.name') }}. All rights reserved.
+   25          @endcomponent
+   26      @endslot
+
+C:\Users\David Acuña\TrabajoTitulo\srtitulo\vendor\laravel\framework\src\Illuminate\Notifications\resources\views\email.blade.php:
+   46  {{ $salutation }}
+   47  @else
+   48: Regards,<br>{{ config('app.name') }}
+   49  @endif
+   50  
+
+25 matches across 13 files
+
+
+Searching 5982 files for "indiers"
+
+C:\Users\David Acuña\TrabajoTitulo\srtitulo\.env:
+    1: APP_NAME=IndieRec
+    2  APP_ENV=local
+    3  APP_KEY=base64:6wdIEcp8o9sgl8qtzgeojsVXKJ6mNIVgEyL6rdjxCUU=
+
+1 match in 1 file

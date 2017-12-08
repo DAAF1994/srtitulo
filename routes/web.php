@@ -29,7 +29,7 @@ Route::post('verjuego', 'JuegosController@getgame');
 Route::get('/game/{id}', 'JuegosController@getGame');
 Route::post('/valorarjuego', 'JuegosController@valorar');
 Route::get('/prueba/{id}', 'JuegosController@recomendar_juegos');
-
+Route::get('/obtenerperfil', 'JuegosController@obtener_perfil');
 Route::get('auth/logout', 'Auth\AuthController@logout');
 
 
