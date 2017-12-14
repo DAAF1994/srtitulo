@@ -216,7 +216,7 @@ class JuegosController extends Controller
 		}
 
 		//dd($juegos_paraevaluar);
-		return view('obtener_perfil')->with('juegos_paraevaluar', $juegos_paraevaluar);
+		return view('tabladavid')->with('juegos_paraevaluar', $juegos_paraevaluar);
 	}
 
 }
