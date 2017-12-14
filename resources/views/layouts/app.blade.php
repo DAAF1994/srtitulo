@@ -12,6 +12,15 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+            .blink_me {
+                animation: blinker 1s linear infinite;
+            }
+            
+            @keyframes blinker {  
+                0% { opacity: 100; background-color:  red;}
+            }    
+    </style>
     
 </head>
 <body>
@@ -29,8 +38,8 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name') }}
+                    <a class="navbar-brand blink_me" href="{{ url('/') }}">
+                        IndieRec
                     </a>
                 </div>
 

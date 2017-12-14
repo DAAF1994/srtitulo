@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>IndieRec</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -24,6 +24,13 @@
             .full-height {
                 height: 100vh;
             }
+            .blink_me {
+                animation: blinker 1s linear infinite;
+            }
+            
+            @keyframes blinker {  
+                0% { opacity: 100; background-color:  red;}
+            }    
 
             .flex-center {
                 align-items: center;
@@ -79,7 +86,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    IndieRec
                 </div>
 
                 <div class="links">
