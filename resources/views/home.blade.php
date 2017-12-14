@@ -16,6 +16,19 @@
                     @endif
 
                         <div class="row">
+                            <div class="col-md-3">
+                                <th><IMG SRC="http://files.macapiink.webnode.es/system_preview_detail_200000003-71add72a66-public/LOGO-UTEM.jpg" WIDTH=178 HEIGHT=180 ALT="Logo UTEM"></th>
+                            </div>
+                            <div class="col-md-7">
+                                </br>
+                                <th>Alumno: David Alexis Acuña Fernández</th></br>
+                                <th>Profesor: Santiago Zapata Caceres</th></br>
+                                <th>Carrera: Ingeniería en Informática</th></br>
+                                <th>Año: 2017</th></br>
+                            </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col-md-12">
                                 <a href="{{asset('nuevopost')}}" class="btn btn-success">Nuevo juego</a>
                             </div>
