@@ -73,6 +73,13 @@
                                     </li>
                                     <li>
 
+
+                                        <a href="{{ url('/nuevopost') }}"  >
+                                            Nuevo Juego  
+                                        </a>
+                                        <a href="{{ url('/prueba/') }}" >
+                                            Ver Recomendaciones 
+                                        </a>
                                         <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             Salir  
                                         </a>
