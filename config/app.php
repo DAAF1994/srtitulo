@@ -167,7 +167,11 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-
+        /*
+         * Package Service Providers...
+         */
+        Yajra\Datatables\DatatablesServiceProvider::class,
+        //
         /*
          * Application Service Providers...
          */
