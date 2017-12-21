@@ -10,33 +10,27 @@
         </div>
             <div class="panel panel-success">
                 <div class="panel-heading">Juegos</div>
-                <table class="table table-bordered table-hover">
-                  <th>Imagen</th>
-                  <th>Juego</th>
-                  <th>Año de publicación</th>
-                  <th>Acción</th>
-                  <tbody>
+                <table class="table table-bordered table-hover" id="tabla">
+              
+                <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>ID</th>
+                    <th>Titulo</th>
+                    <th>Año</th>
+                </tr>
+                </thead>
+            
                   @foreach ($juegos_paraevaluar as $key => $game)
                       <tr>
                         <td><IMG width="100px" height="100px" SRC={{$game->image}} ></td>
                           <td>{{ $game->title }}</td>       
                           <td>{{ $game->year }}</td>  
-                          <td>
-                            <div class="form-group">
-                            <button type="button" class="btn btn-success">
-                             Valorar 
-                            </button>
-                              <button type="button" class="btn btn-warning">
-                                Editar 
-                              </button>
-                              <button type="button" class="btn btn-danger">
-                               Eliminar 
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
+                          <td><button>hola</button></td>
+                      </tr>
+                    
                     @endforeach
-                    </tbody>
+                   
                   </table>
               </div>
           </div>
@@ -50,6 +44,27 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script type="text/javascript">
+  $(document).ready(function(){
+    $('#tabla').DataTable({
+
+      "processing": true,
+      "serverSide": true,
+      
+      "ajax": "{{ route('datatable.tasks') }}",
+      "columns": [
+         {
+            "render": function (data, type, JsonResultRow, meta) {
+              return '<img width="100px" height="100px" src="'+JsonResultRow.image+'">';
+              
+            }
+          },
+          {data: 'id', name: 'id'},
+          {data: 'title', name: 'title'},
+          {data: 'year', name: 'year'}
+        
+      ]
+    });
+  });
   
 </script>
 

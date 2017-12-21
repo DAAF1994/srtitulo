@@ -33,6 +33,10 @@ Route::get('/obtenerperfil', 'JuegosController@obtener_perfil');
 Route::get('auth/logout', 'Auth\AuthController@logout');
 
 
+Route::get('/obtenerperfil', 'JuegosController@obtener_perfil');
+
+Route::get('/juegos', 'JuegosController@getJuegos')->name('datatable.tasks');
+
 //Route::post('/{$gamename}', 'JuegosController@postgame');
 
 

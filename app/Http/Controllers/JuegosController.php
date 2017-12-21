@@ -10,6 +10,7 @@ use App\valoracion;
 use App\genre;
 use App\GenreGame;
 use App\PlatformGame;
+use Yajra\Datatables\Datatables;
 
 
 class JuegosController extends Controller
@@ -217,6 +218,16 @@ class JuegosController extends Controller
 
 		//dd($juegos_paraevaluar);
 		return view('tabladavid')->with('juegos_paraevaluar', $juegos_paraevaluar);
+		
+		
 	}
+	public function getJuegos()
+    {
+        $tasks = Juego::All();
+
+        return Datatables::of($tasks)
+
+            ->make(true);
+    }
 
 }
