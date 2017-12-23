@@ -26,7 +26,12 @@
                         <td><IMG width="100px" height="100px" SRC={{$game->image}} ></td>
                           <td>{{ $game->title }}</td>       
                           <td>{{ $game->year }}</td>  
-                          <td><button>hola</button></td>
+                          <td>
+                            <div class="form-group">
+                              <a class="btn btn-warning" href="{{ URL::to('obtenerperfil/editar/'. $game->id ) }}">Editar</a>
+                              <a class="btn btn-success" href="{{ URL::to('obtenerperfil/valorar/'. $game->id ) }}">Valorar</a>
+                            </div>
+                            </td>
                       </tr>
                     
                     @endforeach
@@ -45,11 +50,11 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    $('#tabla').DataTable({
+    /*$('#tabla').DataTable({
 
       "processing": true,
       "serverSide": true,
-      
+      "defaultContent": "<button>Click!</button>",   
       "ajax": "{{ route('datatable.tasks') }}",
       "columns": [
          {
@@ -58,12 +63,13 @@
               
             }
           },
+
           {data: 'id', name: 'id'},
           {data: 'title', name: 'title'},
           {data: 'year', name: 'year'}
         
       ]
-    });
+    });*/
   });
   
 </script>
