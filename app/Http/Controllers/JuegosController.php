@@ -143,33 +143,35 @@ class JuegosController extends Controller
 		foreach ($usuarios as $user) {
 			$discriminante[$user->id] = [];
 			$buserGames = valoracion::where('users_id','=',$user->id)->select('rate')->get();
-			//Obtener las notas promedio
-			$avguser = $this->rateSum($buserGames)/count($buserGames);
-			$numerator = 0;
-			$denominatorA = 0;
-			$denominatorB = 0;
-			foreach($games as $game){
-				$id_game = $game->id;
-				//Obtener las valoraciones del usuario activo para el juego actual analizado
-				$rate_user = valoracion::where('users_id','=',$id)->where('games_id','=',$id_game)->select('rate')->first();
-				//Obtener las valoraciones del usuario de la población para el juego actual analizado
-				$rate = valoracion::where('users_id','=',$user->id)->where('games_id','=',$id_game)->select('rate')->first();
-				
-				//Calcular la correlación de pearson
-				if(!empty($rate_user) && !empty($rate)){
-				   $raj = $rate_user->rate - $avgActiveUser;
-				   $rbj = $rate->rate - $avguser;
-				   $numerator = $numerator + ($raj * $rbj);
-				   $denominatorA = $denominatorA + pow($raj,2);
-				   $denominatorB = $denominatorB + pow($rbj,2);
-				}
-				if(empty($rate_user) && !empty($rate)){//conseguir discriminante de juegos que no tiene el usuario activo
-					$rbj = $rate->rate - $avguser;
-					$discriminante[$user->id][$id_game] = $rbj;
-				}
+			if(count($buserGames) > 0){
+					//Obtener las notas promedio
+					$avguser = $this->rateSum($buserGames)/count($buserGames);
+					$numerator = 0;
+					$denominatorA = 0;
+					$denominatorB = 0;
+					foreach($games as $game){
+						$id_game = $game->id;
+						//Obtener las valoraciones del usuario activo para el juego actual analizado
+						$rate_user = valoracion::where('users_id','=',$id)->where('games_id','=',$id_game)->select('rate')->first();
+						//Obtener las valoraciones del usuario de la población para el juego actual analizado
+						$rate = valoracion::where('users_id','=',$user->id)->where('games_id','=',$id_game)->select('rate')->first();
+						
+						//Calcular la correlación de pearson
+						if(!empty($rate_user) && !empty($rate)){
+						   $raj = $rate_user->rate - $avgActiveUser;
+						   $rbj = $rate->rate - $avguser;
+						   $numerator = $numerator + ($raj * $rbj);
+						   $denominatorA = $denominatorA + pow($raj,2);
+						   $denominatorB = $denominatorB + pow($rbj,2);
+						}
+						if(empty($rate_user) && !empty($rate)){//conseguir discriminante de juegos que no tiene el usuario activo
+							$rbj = $rate->rate - $avguser;
+							$discriminante[$user->id][$id_game] = $rbj;
+						}
+					}
+					//Guardar las correlaciones en un arreglo asociativo   id_usuario => correlacion
+					$corr_array[$user->id] = $numerator / sqrt($denominatorA * $denominatorB);
 			}
-			//Guardar las correlaciones en un arreglo asociativo   id_usuario => correlacion
-			$corr_array[$user->id] = $numerator / sqrt($denominatorA * $denominatorB);
 		}		
 		
 		//Ordenar recomendaciones por valores más cercanos al 1
