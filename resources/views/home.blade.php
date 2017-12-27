@@ -44,61 +44,39 @@
                             <label> Aún no hay juegos en el sistema</label>
                         @else
                             <div class="row">
-                                <form action="/buscarjuego" method="POST" role="search">
-                                    {{ csrf_field() }}
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="gamename"
-                                            placeholder="Buscar Juegos"> <span class="input-group-btn">
-                                            <button type="submit" class="btn btn-default">
-                                                <span class="glyphicon glyphicon-search"></span>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </form>
 
-                            </br>
-                            <table class="tabladavid">
-                                @foreach ($games as $game)
-                    
-                                              <tr>
-                                                <th>Título</th>
-                                                <td> {{ $game->title }} </td>
-                                              </tr>
-                                              <tr>
-                                                <th>Imagen</th>
-                                                <td><IMG SRC={{$game->image}}} ></td>
-                                              </tr>
-                                              <tr>
-                                                <th>Año de publicación</th>
-                                                <td> {{$game->year}} </td>
-                                              </tr>
-                                              <tr>
-                                                <th>Descripción</th>
-                                                <td> {{ $game->plot }}</td>
-                                              </tr>
-                                              <tr>
-                                                <th>Géneros</th>
-                                                <td>
-                                                    @foreach($game->getGenreGames as $genre)
-                                                      {{$genre->getGenre->name}},
-                                                    @endforeach
-                                                </td>
-                                              </tr>
-                                                <tr>
-                                                    <th>Desarrollador</th>
-                                                    <td> {{ $game->developer }}</td>
-                                                </tr>
-                                                
-                                               <tr>
-                                                  <th>Plataformas</th>
-                                                  <td>
-                                                    @foreach($game->getPlatformGame as $platform)
-                                                      {{$platform->getPlatform->name}},
-                                                    @endforeach
-                                                  </td>
-                                                </tr>
-                                                
-                                @endforeach
+                            <input type="text" id="search" placeholder="Escribe para buscar..." class="form-control" />
+                            <table class="table table-bordered table-hover" id="tabla">
+                            
+                              <thead>
+                              <tr>
+                                  <th>Image</th>
+                                  <th>ID</th>
+                                  <th>Titulo</th>
+                                  <th>Año</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                                @foreach ($games as $key => $game)
+                                    <tr>
+                                      <td><IMG width="100px" height="100px" SRC={{$game->image}} ></td>
+                                        <td>{{ $game->title }}</td>       
+                                        <td>{{ $game->year }}</td>  
+                                        <td>
+                                          <div class="form-group">
+                                            <a class="btn btn-warning" href="{{ URL::to('/editar/'. $game->id ) }}">Editar</a>
+                                            <a class="btn btn-success" href="{{ URL::to('/valorar/'. $game->id ) }}">Valorar</a>
+                                            <form name="delete" method="post" action="eliminar">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="id_juego" value="{{ $game->id }}">
+                                            <button class = "btn btn-danger" type="submit">Eliminar</button>
+                                            </form>
+                                          </div>
+                                          </td>
+                                    </tr>
+                                  
+                                  @endforeach
+                                  </tbody>
                                 </table>
                             </div>
 
@@ -118,6 +96,22 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="{{asset('/js/bootstrap-multiselect.js')}}"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.quicksearch/2.2.1/jquery.quicksearch.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#search").keyup(function(){
+        _this = this;
+        // Muestra los tr que concuerdan con la busqueda, y oculta los demás.
+        $.each($("#tabla tbody tr"), function() {
+            if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+               $(this).hide();
+            else
+               $(this).show();                
+        });
+    }); 
+  });
+  
+</script>
 
 @endsection

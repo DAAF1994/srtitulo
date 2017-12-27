@@ -43,7 +43,7 @@
                                                 <th>Géneros</th>
                                                 <td>
                                                     @foreach($genres as $key => $genre)
-                                                        {{$genre->getGenre->name}},                                                       
+                                                        {{$genre->getGenre()->get()[0]->name}},                                                       
                                                     @endforeach
                                                 </td>    
                                                 </tr>

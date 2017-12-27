@@ -95,15 +95,29 @@ class JuegosController extends Controller
 
 
 	public function valorar(Request $request){
-		dd($request);
+		//dd($request);
 		//Obtener id del usuario activo
 		$userid = Auth::id();
-		//Hacer valoración para el juego
-		$valoracion = new valoracion();
-		$valoracion->games_id = $request->input('gameid');
-		$valoracion->rate = $request->input('rate');
-		$valoracion->users_id = $userid;
-		$valoracion->save();
+		$id_juego = $request->input('gameid');
+		
+		$resutado= $request->input('rate');
+		
+		$query = valoracion::where("users_id",$userid)->where("games_id",$id_juego)->count();
+		if($query >= 1){
+			$valoracion = valoracion::where("users_id",$userid)->where("games_id",$id_juego)->first();
+			$valoracion->games_id = $id_juego;
+			$valoracion->users_id = Auth::id();
+			$valoracion->rate = $resutado;
+			$valoracion->save();
+		}else{
+			$valoracion = new valoracion();
+			$valoracion->games_id = $request->input('gameid');
+			$valoracion->rate = $request->input('rate');
+			$valoracion->users_id = $userid;
+			$valoracion->save();
+
+		}
+
 		return redirect('/');
 	}
 
@@ -221,7 +235,7 @@ class JuegosController extends Controller
 		//dd($juegos_paraevaluar);
 		return view('tabladavid')->with('juegos_paraevaluar', $juegos_paraevaluar);
 		
-		
+		//valorar
 	}
 	public function getJuegos()
     {
@@ -230,6 +244,45 @@ class JuegosController extends Controller
         return Datatables::of($tasks)
 
             ->make(true);
-    }
+	}
+	public function getEditar($id)
+    {
+		$juego = Juego::findOrFail($id);
+		$generos = Genre::all();
+		
+        return view('editar')->with("juego",$juego)->with("genres",$generos);
+	}
+    public function postEditar(Request $request)
+    {
+		  $id_juego = $request->get("id_juego");
+		  $juego = Juego::findOrFail($id_juego);
+		  $juego->title = $request->get("title");
+		  $juego->year = $request->get("year");
+		  $juego->plot = $request->get("plot");
+		  $juego->developer = $request->get("developer");
+		  $juego->save();
+		  $juegos = Juego::all();
+		  //dd($juegos_paraevaluar);
+		 return redirect('/')->with('games', $juegos);
+
+	}
+
+	public function getValorar($id)
+    {
+		$juego = Juego::findOrFail($id);
+		//dd($juego);
+		$generos = GenreGame::where("games_id",$juego->id)->get();
+		
+        return view('verjuego')->with("game",$juego)->with("genres",$generos);
+	}
+
+	public function postEliminar(Request $request)
+    {
+		$id_juego = $request->get("id_juego");
+		$juego = Juego::find($id_juego)->delete();
+		$juegos = Juego::all();
+		
+        return view('/')->with("games",$juegos);
+	}
 
 }

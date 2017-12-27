@@ -15,4 +15,5 @@ class GenreGame extends Model
     public function getGenre(){
     	return $this->belongsTo('App\genre', 'genre_id');
     }
+
 }

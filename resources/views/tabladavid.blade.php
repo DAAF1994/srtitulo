@@ -11,27 +11,32 @@
             <div class="panel panel-success">
                 <div class="panel-heading">Juegos</div>
                 <table class="table table-bordered table-hover" id="tabla">
+                
+                  <thead>
+                  <tr>
+                      <th>Image</th>
+                      <th>Titulo</th>
+                      <th>Año</th>
+                      <th>Acción</th>
+                  </tr>
+                  </thead>
               
-                <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>ID</th>
-                    <th>Titulo</th>
-                    <th>Año</th>
-                </tr>
-                </thead>
-            
-                  @foreach ($juegos_paraevaluar as $key => $game)
-                      <tr>
-                        <td><IMG width="100px" height="100px" SRC={{$game->image}} ></td>
-                          <td>{{ $game->title }}</td>       
-                          <td>{{ $game->year }}</td>  
-                          <td><button>hola</button></td>
-                      </tr>
-                    
-                    @endforeach
-                   
-                  </table>
+                    @foreach ($juegos_paraevaluar as $key => $game)
+                        <tr>
+                          <td><IMG width="100px" height="100px" SRC={{$game->image}} ></td>
+                            <td>{{ $game->title }}</td>       
+                            <td>{{ $game->year }}</td>  
+                            <td>
+                              <div class="form-group">
+                                <a class="btn btn-warning" href="{{ URL::to('/editar/'. $game->id ) }}">Editar</a>
+                                <a class="btn btn-success" href="{{ URL::to('/valorar/'. $game->id ) }}">Valorar</a>
+                              </div>
+                              </td>
+                        </tr>
+                      
+                      @endforeach
+                     
+                    </table>
               </div>
           </div>
       </div>
@@ -45,11 +50,11 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    $('#tabla').DataTable({
+   /* $('#tabla').DataTable({
 
       "processing": true,
       "serverSide": true,
-      
+      "defaultContent": "<button>Click!</button>",   
       "ajax": "{{ route('datatable.tasks') }}",
       "columns": [
          {
@@ -58,12 +63,17 @@
               
             }
           },
+
           {data: 'id', name: 'id'},
           {data: 'title', name: 'title'},
-          {data: 'year', name: 'year'}
+          {data: 'year', name: 'year'},
+          {
+              "data": null,
+              "defaultContent": "<button>Edit</button>"
+            }
         
       ]
-    });
+    });*/
   });
   
 </script>
