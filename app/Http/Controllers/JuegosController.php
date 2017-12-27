@@ -261,17 +261,9 @@ class JuegosController extends Controller
 		  $juego->plot = $request->get("plot");
 		  $juego->developer = $request->get("developer");
 		  $juego->save();
-		  $games = ['Stardew Valley',  'Mark of the Ninja', 'Undertale', 'Cuphead', 'The Binding of Isaac', 
-		  '7 Days to Die', 'Rocket League', "Don't Starve",
-		  "A Detective's Novel", 'Dust: an Elysian tale', 'Hotline Miami', 'Castle Crashers', 'Darkest Dungeon', 
-		  'American Truck Simulator', 'Skullgirls', 'Road Redemption'];
-		  $juegos_paraevaluar = [];
-		  foreach ($games as $key => $value) {
-			  $juegos_paraevaluar[] = Juego::where('title', $value)->first();
-		  }
-  
+		  $juegos = Juego::all();
 		  //dd($juegos_paraevaluar);
-		 // return redirect('obtenerperfil')->with('juegos_paraevaluar', $juegos_paraevaluar);
+		 return redirect('/')->with('games', $juegos);
 
 	}
 
@@ -282,6 +274,15 @@ class JuegosController extends Controller
 		$generos = GenreGame::where("games_id",$juego->id)->get();
 		
         return view('verjuego')->with("game",$juego)->with("genres",$generos);
+	}
+
+	public function postEliminar(Request $request)
+    {
+		$id_juego = $request->get("id_juego");
+		$juego = Juego::find($id_juego)->delete();
+		$juegos = Juego::all();
+		
+        return view('/')->with("games",$juegos);
 	}
 
 }

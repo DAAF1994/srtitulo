@@ -34,9 +34,10 @@ Route::get('auth/logout', 'Auth\AuthController@logout');
 
 
 Route::get('/obtenerperfil', 'JuegosController@obtener_perfil');
-//Route::get('/obtenerperfil/editar/{id}', 'JuegosController@getEditar');
-Route::get('/obtenerperfil/valorar/{id}', 'JuegosController@getValorar');
-//Route::post('/obtenerperfil/editar', 'JuegosController@postEditar');
+Route::get('//editar/{id}', 'JuegosController@getEditar');
+Route::get('/valorar/{id}', 'JuegosController@getValorar');
+Route::post('/editar', 'JuegosController@postEditar');
+Route::post('/eliminar', 'JuegosController@postEliminar');
 Route::get('/juegos', 'JuegosController@getJuegos')->name('datatable.tasks');
 
 //Route::post('/{$gamename}', 'JuegosController@postgame');
