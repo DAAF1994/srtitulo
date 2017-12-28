@@ -28,7 +28,7 @@
                                     <input type="text" name="year" class="form-control">
                                 </div>
                                 <div class="col-md-12 margenes">
-                                    <label >Trama</label>
+                                    <label >Descripción</label>
                                     <textarea name="plot" class="form-control"></textarea>
                                 </div>
                                 <div class="col-md-6 margenes">

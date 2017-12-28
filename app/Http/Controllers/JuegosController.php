@@ -130,7 +130,7 @@ class JuegosController extends Controller
 	}
 
 
-	public function recomendar_juegos($id){
+public function recomendar_juegos($id){
 		$usuarios = User::where('id','!=',$id)->get(); //obtener id de los usuarios distintos al activo
 		$games = Juego::all(); //obtener todos los juegos
 		$usersgame = valoracion::where('users_id','=',$id)->select('rate')->get();//obtener valoraciones de los usuarios a los juegos
@@ -138,7 +138,7 @@ class JuegosController extends Controller
 		//Notas promedio del usuario activo
 		$avgActiveUser = $this->rateSum($usersgame)/count($usersgame);
 		$corr_array = [];
-		$dj = []; #id del juego con rbj
+		$corr = 0;
 		$discriminante = [];
 		foreach ($usuarios as $user) {
 			$discriminante[$user->id] = [];
@@ -170,7 +170,12 @@ class JuegosController extends Controller
 						}
 					}
 					//Guardar las correlaciones en un arreglo asociativo   id_usuario => correlacion
-					$corr_array[$user->id] = $numerator / sqrt($denominatorA * $denominatorB);
+					if($denominatorA != 0 and $denominatorB != 0){
+						$corr = $numerator / sqrt($denominatorA * $denominatorB);
+						if($corr > 0.6){
+							$corr_array[$user->id] = $corr;
+						}
+					}
 			}
 		}		
 		
@@ -195,9 +200,11 @@ class JuegosController extends Controller
 							$sumanum = $sumanum + ($discriminante[$userid][$value] * $value2);
 							$sumaden = $sumaden + $value2; 
 						}
+					if($sumaden != 0){
 						$prediccion = $avgActiveUser + ($sumanum/$sumaden); 
-						
-					if($prediccion>=5){
+					}
+					
+					if($prediccion>=7){
 							$recomendaciones[$value] = $prediccion; //guardar los juegos que el usuario B haya evaluado
 						}											//y el usuario A no haya evaluado
 
