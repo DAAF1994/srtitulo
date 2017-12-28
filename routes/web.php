@@ -32,6 +32,7 @@ Route::get('/prueba/{id}', 'JuegosController@recomendar_juegos');
 Route::get('/obtenerperfil', 'JuegosController@obtener_perfil');
 Route::get('auth/logout', 'Auth\AuthController@logout');
 
+Route::get('recomendacionesprovisorias/{id}', 'JuegosController@recomendacionesprovisorias');
 
 Route::get('/obtenerperfil', 'JuegosController@obtener_perfil');
 Route::get('//editar/{id}', 'JuegosController@getEditar');

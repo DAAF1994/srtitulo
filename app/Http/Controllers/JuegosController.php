@@ -131,12 +131,16 @@ class JuegosController extends Controller
 
 
 public function recomendar_juegos($id){
+	
+
 		$usuarios = User::where('id','!=',$id)->get(); //obtener id de los usuarios distintos al activo
 		$games = Juego::all(); //obtener todos los juegos
 		$usersgame = valoracion::where('users_id','=',$id)->select('rate')->get();//obtener valoraciones de los usuarios a los juegos
 		$a = $this->rateSum($usersgame);
 		//Notas promedio del usuario activo
-		$avgActiveUser = $this->rateSum($usersgame)/count($usersgame);
+		if(count($usersgame)>0):
+			$avgActiveUser = $this->rateSum($usersgame)/count($usersgame);
+		endif;
 		$corr_array = [];
 		$corr = 0;
 		$discriminante = [];
@@ -158,6 +162,7 @@ public function recomendar_juegos($id){
 						
 						//Calcular la correlación de pearson
 						if(!empty($rate_user) && !empty($rate)){
+
 						   $raj = $rate_user->rate - $avgActiveUser;
 						   $rbj = $rate->rate - $avguser;
 						   $numerator = $numerator + ($raj * $rbj);
@@ -172,12 +177,15 @@ public function recomendar_juegos($id){
 					//Guardar las correlaciones en un arreglo asociativo   id_usuario => correlacion
 					if($denominatorA != 0 and $denominatorB != 0){
 						$corr = $numerator / sqrt($denominatorA * $denominatorB);
-						if($corr > 0.6){
+						if($corr > 0.5){
 							$corr_array[$user->id] = $corr;
 						}
 					}
+
 			}
-		}		
+		}
+
+
 		
 		//Ordenar recomendaciones por valores más cercanos al 1
 		arsort($corr_array);
@@ -186,7 +194,7 @@ public function recomendar_juegos($id){
 		$prediccion = 0;
 		//Función para hacer recomendaciones, 
 		foreach ($corr_array as $userid => $corr) {
-			if ($counter <=5){ //5 es la cantidad de vecinos a evaluar
+			if ($counter <= 10){ //5 es la cantidad de vecinos a evaluar
 				$games1 = valoracion::where('users_id','=',$userid)->pluck('games_id')->toArray();
 				$gamesActiveUser = valoracion::where('users_id','=',$id)->pluck('games_id')->toArray();
 				//Obtener ids de juegos diferentes
@@ -218,6 +226,7 @@ public function recomendar_juegos($id){
 		}
 		arsort($recomendaciones);//ordenar las predicciones de mayor a menor
 		//$juegos_recomendados = Juego::find(array_keys($recomendaciones)); //enviar recomendaciones a la vista
+		//dd($corr_array, $recomendaciones, $recomendaciones);
 		$juegos_recomendados = [];
 		foreach ($recomendaciones as $key => $value) {
 			$juegos_recomendados[] = Juego::find($key);
@@ -290,6 +299,84 @@ public function recomendar_juegos($id){
 		$juegos = Juego::all();
 		
         return view('/')->with("games",$juegos);
+	}
+
+
+	public function recomendacionesProvisorias($userid){
+		$genres = Genre::all();
+		$genreReferences = [];
+		//inicializar el arreglo de generos con cero
+		foreach ($genres as $genre) {
+			$genreReferences [$genre->id] = 0;
+		}
+		//juegos que ha valorado el usuario activo
+		$userGames = valoracion::where('users_id','=',$userid)->pluck('games_id')->toArray();
+		foreach ($userGames as $gameid) {
+			$genresGame = GenreGame::where('games_id','=',$gameid)->select('genre_id')->get();
+			foreach ($genresGame as $genreid) {		
+				$genreReferences[$genreid->genre_id]++;
+			}
+		}
+		$avgReferences = 0;
+		$sumReferences = 0;
+		$ctReferences = 0;
+		//obtener promedio de cantidad de referencias a generos
+		foreach ($genreReferences as $key => $value) {
+			if ($value > 0){
+				$sumReferences+=$value;
+				$ctReferences++;
+			}
+		}
+		if ($ctReferences != 0){
+			$avgReferences = $sumReferences / $ctReferences;
+		}
+		//obtener los generos que más ha valorado el usuario
+		$selectedGenres = [];
+		foreach ($genreReferences as $key => $value) {
+			if($value >= intval(round($avgReferences))){
+				$selectedGenres[$key] = $value;
+			}
+		}
+		$games = Juego::all()->pluck('id')->toArray();
+		$diffgames = array_diff($games, $userGames);
+		$gamesRate = [];
+		//recorrer todos los juegos y obtener sus generos
+		foreach ($diffgames as $game) {
+
+			$genresGame = GenreGame::where('games_id','=',$game)->select('genre_id')->get();
+			$sumReferences = 0;
+			//recorrer los generos que tiene el juego y comprobar si al usuario le interesa alguno de los generos que tiene
+			foreach ($genresGame as $genre) {
+				if (array_key_exists($genre->genre_id, $selectedGenres)){
+					$sumReferences += $selectedGenres[$genre->genre_id];
+				}
+			}
+			//dd($sumReferences, $genresGame, $selectedGenres, $game->id);
+			//para cada juego guardar el puntaje correspondiente, puntaje = sumatoria de las referencias por genero
+			if ($sumReferences > 0 && $sumReferences != NULL){
+				$gamesRate[$game] = $sumReferences;
+			}
+		}
+		arsort($gamesRate);
+		$counter = 0;
+		$selectedGames = [];
+		//seleccionar los 10 juegos que más podrian gustarle al usuario
+		foreach ($gamesRate as $key => $value) {
+			if($counter < 10):
+				$selectedGames[] = $key;
+				$counter++;
+			else:
+				break;
+			endif;
+		}
+
+		$juegos_recomendados = [];
+		foreach ($selectedGames as $key => $value) {
+			$juegos_recomendados[] = Juego::find($value);
+		}
+		//dd($juegos_recomendados, $selectedGames,$gamesRate);
+		return view('ver_recomendaciones')->with('juegos_recomendados', $juegos_recomendados);
+		
 	}
 
 }

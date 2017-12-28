@@ -9,13 +9,13 @@
           <strong>Ohh!</strong> Usted no ha evaluado ningun juego aun
         </div>
             <div class="panel panel-success">
-                <div class="panel-heading">Juegos</div>
+                <div class="panel-heading">Algunos Juegos Populares</div>
                 <table class="table table-bordered table-hover" id="tabla">
                 
                   <thead>
                   <tr>
-                      <th>Image</th>
-                      <th>Titulo</th>
+                      <th>Imagen</th>
+                      <th>Título</th>
                       <th>Año</th>
                       <th>Acción</th>
                   </tr>

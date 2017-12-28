@@ -36,7 +36,12 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <a href="/prueba/{{Auth::id()}}" class="btn btn-success">Ver recomendaciones</a>
+                                <a href="/prueba/{{Auth::id()}}" class="btn btn-success">Recomendación por comunidad</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="/recomendacionesprovisorias/{{Auth::id()}}" class="btn btn-success">Recomendación por Género</a>
                             </div>
                         </div>
                         </br>
@@ -50,10 +55,10 @@
                             
                               <thead>
                               <tr>
-                                  <th>Image</th>
-                                  <th>ID</th>
-                                  <th>Titulo</th>
+                                  <th>Imagen</th>
+                                  <th>Nombre</th>
                                   <th>Año</th>
+                                  <th>Opciones</th>
                               </tr>
                               </thead>
                               <tbody>
