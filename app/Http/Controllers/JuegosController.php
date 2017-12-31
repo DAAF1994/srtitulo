@@ -9,6 +9,7 @@ use App\User;
 use App\valoracion;
 use App\genre;
 use App\GenreGame;
+use App\Platform;
 use App\PlatformGame;
 use Yajra\Datatables\Datatables;
 
@@ -34,7 +35,8 @@ class JuegosController extends Controller
 	{
 		$posts = Juego::all();
 		$genres = genre::all();
-		return view('post')->with("posts",$posts)->with("genres",$genres);
+		$platforms = Platform::all();
+		return view('post')->with("posts",$posts)->with("genres",$genres)->with("platforms",$platforms);
 	}
 
 	public function addGame(Request $request) //agregar un nuevo post
@@ -46,6 +48,7 @@ class JuegosController extends Controller
 			$juego->year = $request->input("year");
 			$juego->plot = $request->input("plot");
 			$juego->developer = $request->input("developer");
+			$juego->image = $request->input("image");
 			$juego->save();
 
 			$genres = $request->input("genre");
@@ -54,6 +57,14 @@ class JuegosController extends Controller
 				$gg->games_id = $juego->id;
 				$gg->genre_id = $genre;
 				$gg->save();
+			}
+
+			$platforms = $request->input("platform");
+			foreach($platforms as $platform){       
+				$pg = new PlatformGame();
+				$pg->games_id = $juego->id;
+				$pg->platform_id = $platform;
+				$pg->save();
 			}
 
 			$games = Juego::all();
@@ -265,8 +276,9 @@ public function recomendar_juegos($id){
     {
 		$juego = Juego::findOrFail($id);
 		$generos = Genre::all();
+		$platforms = Platform::all();
 		
-        return view('editar')->with("juego",$juego)->with("genres",$generos);
+        return view('editar')->with("juego",$juego)->with("genres",$generos)->with("platforms",$platforms);
 	}
     public function postEditar(Request $request)
     {

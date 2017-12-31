@@ -35,12 +35,27 @@
                                     <label >Desarrollador</label>
                                     <input type="text" name="developer" class="form-control">
                                 </div>
+                                    <div class="col-md-12 margenes">
+                                    <label >Ingrese dirección de imagen</label>
+                                    <input type="text" name="image" class="form-control">
+                                </div>
+
                             </div>
                             </br>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <select id="multiselect-genre" name="genre[]" multiple="multiple">
                                     @foreach($genres as $genre)
                                         <option value="{{$genre->id}}">{{$genre->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            </br>
+
+                            <div class="col-md-6" align="right">
+                                <select id="multiselect-platform" name="platform[]" multiple="multiple">
+                                    @foreach($platforms as $platform)
+                                        <option value="{{$platform->id}}">{{$platform->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -65,6 +80,12 @@
                      <script>
                         $(document).ready(function() {
                             $('#multiselect-genre').multiselect();
+                        });
+                    </script>
+                    
+                     <script>
+                        $(document).ready(function() {
+                            $('#multiselect-platform').multiselect();
                         });
                     </script>
             </div>
