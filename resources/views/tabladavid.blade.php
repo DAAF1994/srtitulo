@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-12">
         <div class="alert alert-danger">
-          <strong>Ohh!</strong> Usted no ha evaluado ningun juego aun
+          <strong>Ohh!</strong> Usted no ha evaluado ningún Juego aún
         </div>
             <div class="panel panel-success">
                 <div class="panel-heading">Algunos Juegos Populares</div>

@@ -13,7 +13,7 @@ class Valoracion extends Migration
      */
     public function up()
     {
-     Schema::create('Valoracion', function($table)
+     Schema::create('valoracion', function($table)
         {
             $table->increments('id');
             $table->integer('games_id')->unsigned();
@@ -33,7 +33,7 @@ class Valoracion extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::drop('Valoracion');
+        Schema::drop('valoracion');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

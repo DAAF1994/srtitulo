@@ -16,10 +16,10 @@
                     @endif
 
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="form-group col-md-3">
                                 <th><IMG SRC="http://files.macapiink.webnode.es/system_preview_detail_200000003-71add72a66-public/LOGO-UTEM.jpg" WIDTH=178 HEIGHT=180 ALT="Logo UTEM"></th>
                             </div>
-                            <div class="col-md-7">
+                            <div class="form-group col-md-7">
                                 </br>
                                 <th>Alumno: David Alexis Acuña Fernández</th></br>
                                 <th>Profesor: Santiago Zapata Caceres</th></br>
@@ -29,63 +29,64 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-12">
-                                <a href="{{asset('nuevopost')}}" class="btn btn-success">Nuevo juego</a>
+                            <div class="form-group col-md-6">
+                                <a href="{{asset('nuevopost')}}" role="button" class="btn btn-success">Nuevo juego</a>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-12">
-                                <a href="/prueba/{{Auth::id()}}" class="btn btn-success">Recomendación por comunidad</a>
+                            <div class="form-group col-md-6">
+                                <a href="/prueba/{{Auth::id()}}" role="button" class="btn btn-success">Recomendación por comunidad</a>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
+                            <div class="form-group col-md-6">
                                 <a href="/recomendacionesprovisorias/{{Auth::id()}}" class="btn btn-success">Recomendación por Género</a>
                             </div>
                         </div>
+
+                        
                         </br>
                         @if (count($games) == 0)
                             <label> Aún no hay juegos en el sistema</label>
                         @else
-                            <div class="row">
-
-                            <input type="text" id="search" placeholder="Escribe para buscar..." class="form-control" />
-                            <table class="table table-bordered table-hover" id="tabla">
-                            
-                              <thead>
-                              <tr>
-                                  <th>Imagen</th>
-                                  <th>Nombre</th>
-                                  <th>Año</th>
-                                  <th>Opciones</th>
-                              </tr>
-                              </thead>
-                              <tbody>
-                                @foreach ($games as $key => $game)
-                                    <tr>
-                                      <td><IMG width="100px" height="100px" SRC={{$game->image}} ></td>
-                                        <td>{{ $game->title }}</td>       
-                                        <td>{{ $game->year }}</td>  
-                                        <td>
-                                          <div class="form-group">
-                                            <a class="btn btn-warning" href="{{ URL::to('/editar/'. $game->id ) }}">Editar</a>
-                                            <a class="btn btn-success" href="{{ URL::to('/valorar/'. $game->id ) }}">Valorar</a>
-                                            <form name="delete" method="post" action="eliminar">
-                                                {{ csrf_field() }}
-                                                <input type="hidden" name="id_juego" value="{{ $game->id }}">
-                                            <button class = "btn btn-danger" type="submit">Eliminar</button>
-                                            </form>
-                                          </div>
-                                          </td>
-                                    </tr>
-                                  
-                                  @endforeach
-                                  </tbody>
-                                </table>
+                            <div class="row form-group">
+                                <div class="col-md-12">
+                                <input type="text" class="form-control" id="search" placeholder="Escribe para buscar..." class="form-control" />
+                                </div>
                             </div>
-
-                        
+                            <div class="row form-group">
+                                <div class="col-md-12"> 
+                                <table class="table table-bordered table-hover" id="tabla">
+                                    <thead>
+                                        <tr>
+                                            <th>Imagen</th>
+                                            <th>Nombre</th>
+                                            <th>Año</th>
+                                            <th>Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach ($games as $key => $game)
+                                        <tr>
+                                        <td><IMG width="100px" height="100px" SRC={{$game->image}} ></td>
+                                            <td>{{ $game->title }}</td>       
+                                            <td>{{ $game->year }}</td>  
+                                            <td>
+                                            <div class="form-group">
+                                                <a class="btn btn-warning" href="{{ URL::to('/editar/'. $game->id ) }}">Editar</a>
+                                                <a class="btn btn-success" href="{{ URL::to('/valorar/'. $game->id ) }}">Valorar</a>
+                                                {{-- <form name="delete" method="post" action="eliminar">
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" name="id_juego" value="{{ $game->id }}">
+                                                    <button class = "btn btn-danger" type="submit">Eliminar</button>
+                                                </form> --}}
+                                            </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
                         @endif
                             
                   

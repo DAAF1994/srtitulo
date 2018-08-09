@@ -255,11 +255,10 @@ public function recomendar_juegos($id){
 		"A Detective's Novel", 'Dust: an Elysian tale', 'Hotline Miami', 'Castle Crashers', 'Darkest Dungeon', 
 		'American Truck Simulator', 'Skullgirls', 'Road Redemption'];
 		$juegos_paraevaluar = [];
-		foreach ($games as $key => $value) {
-			$juegos_paraevaluar[] = Juego::where('title', $value)->first();
+		foreach ($games as $game) {
+			$juegos_paraevaluar[] = Juego::where('title', $game)->first();
 		}
 
-		//dd($juegos_paraevaluar);
 		return view('tabladavid')->with('juegos_paraevaluar', $juegos_paraevaluar);
 		
 		//valorar

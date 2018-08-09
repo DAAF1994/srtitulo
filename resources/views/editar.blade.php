@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading"><b>Ingrese un nuevo juego</b></div>
+                <div class="panel-heading"><b>Editando el Juego {{$juego->title}}</b></div>
                 <div class="panel-body">
                     @if (session('status'))
                         <div class="alert alert-success">
@@ -17,47 +17,49 @@
                     <form  action="../editar" method="post" class="horizontal-form">
 
             
-                        <div class="form-body">
-                            <div class="row">
-                               <input type="hidden" class="form-control" name="id_juego" value="{{$juego->id}}">
-                                <div class="col-md-6 margenes">
-                                    <label >Título</label>
-                                    <input type="text" class="form-control" name="title" value="{{$juego->title}}">
+                            <div class="form-body">
+                                <div class="row">
+                                    <input type="hidden" class="form-control" name="id_juego" value="{{$juego->id}}">
+                                    <div class="form-group col-md-6 margenes">
+                                        <label >Título</label>
+                                        <input type="text" class="form-control" name="title" value="{{$juego->title}}">
+                                    </div>
+                                    <div class="form-group col-md-6 margenes" >
+                                        <label >Año publicación</label>
+                                        <input type="text" name="year" class="form-control" value="{{$juego->year}}">
+                                    </div>
+                                    <div class="form-group col-md-12 margenes">
+                                        <label >Descripción</label>
+                                        <textarea name="plot" class="form-control">{{$juego->plot}}</textarea>
+                                    </div>
+                                    <div class="form-group col-md-6 margenes">
+                                        <label >Desarrollador</label>
+                                        <input type="text" name="developer" class="form-control" value="{{$juego->developer}}">
+                                    </div>
+                                    <div class="form-group col-md-12 margenes">
+                                        <label >Ingrese Dirección de Imagen</label>
+                                        <input type="text" name="image" class="form-control" value="{{$juego->image}}">
+                                    </div>
                                 </div>
-                                <div class="col-md-6 margenes" >
-                                    <label >Año publicación</label>
-                                    <input type="text" name="year" class="form-control" value="{{$juego->year}}">
-                                </div>
-                                <div class="col-md-12 margenes">
-                                    <label >Descripcion</label>
-                                    <textarea name="plot" class="form-control">{{$juego->plot}}</textarea>
-                                </div>
-                                <div class="col-md-6 margenes">
-                                    <label >Desarrollador</label>
-                                    <input type="text" name="developer" class="form-control" value="{{$juego->developer}}">
-                                </div>
-                                </div>
-                                    <div class="col-md-12 margenes">
-                                    <label >Ingrese dirección de imagen</label>
-                                    <input type="text" name="image" class="form-control" value="{{$juego->image}}">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <select class="form-control" id="multiselect-genre" name="genre[]" multiple="multiple">
+                                            @foreach($genres as $genre)
+                                                <option value="{{$genre->id}}">{{$genre->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+        
+                                    <div class="form-group col-md-6" >
+                                        <select class="form-control" id="multiselect-platform" name="platform[]" multiple="multiple">
+                                            @foreach($platforms as $platform)
+                                                <option value="{{$platform->id}}">{{$platform->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                            </br>
-                            <div class="col-md-12">
-                                <select id="multiselect-genre" name="genre[]" multiple="multiple">
-                                    @foreach($genres as $genre)
-                                        <option value="{{$genre->id}}">{{$genre->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="col-md-12" align="right">
-                                <select id="multiselect-platform" name="platform[]" multiple="multiple">
-                                    @foreach($platforms as $platform)
-                                        <option value="{{$platform->id}}">{{$platform->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                            
 
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="col-md-12 text-center">
