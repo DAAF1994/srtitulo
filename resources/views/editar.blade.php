@@ -41,7 +41,7 @@
                                         <input type="text" name="image" class="form-control" value="{{$juego->image}}">
                                     </div>
                                 </div>
-                                <div class="row">
+                                {{-- <div class="row">
                                     <div class="form-group col-md-6">
                                         <select class="form-control" id="multiselect-genre" name="genre[]" multiple="multiple">
                                             @foreach($genres as $genre)
@@ -57,7 +57,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                             
 
