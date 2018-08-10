@@ -188,7 +188,7 @@ public function recomendar_juegos($id){
 					//Guardar las correlaciones en un arreglo asociativo   id_usuario => correlacion
 					if($denominatorA != 0 and $denominatorB != 0){
 						$corr = $numerator / sqrt($denominatorA * $denominatorB);
-						if($corr > 0.5){
+						if($corr >= 0){
 							$corr_array[$user->id] = $corr;
 						}
 					}
@@ -223,7 +223,7 @@ public function recomendar_juegos($id){
 						$prediccion = $avgActiveUser + ($sumanum/$sumaden); 
 					}
 					
-					if($prediccion>=7){
+					if($prediccion>=6){
 							$recomendaciones[$value] = $prediccion; //guardar los juegos que el usuario B haya evaluado
 						}											//y el usuario A no haya evaluado
 
